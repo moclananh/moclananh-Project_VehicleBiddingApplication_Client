@@ -1,27 +1,19 @@
 import { RouteObject } from "react-router-dom";
+import { RootLayout } from "./layouts/RootLayout";
+import AuthPage from "./pages/AuthPage";
 
 const routes: RouteObject[] = [
   {
-    element: <>Auth</>,
-    path: "/auth",
-    children: [
-      {
-        element: <>Login</>,
-        path: "login",
-      },
-      {
-        element: <>Register</>,
-        path: "register",
-      },
-    ],
-  },
-  {
-    element: <>App</>,
+    element: <RootLayout />,
     path: "/",
     children: [
       {
         element: <>Home</>,
-        path: "home",
+        path: "",
+      },
+      {
+        element: <AuthPage />,
+        path: "auth",
       },
     ],
   },
