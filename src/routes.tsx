@@ -1,6 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import { RootLayout } from "./layouts/RootLayout";
 import AuthPage from "./pages/AuthPage";
+import LandingPage from "./pages/LandingPage";
 
 const routes: RouteObject[] = [
   {
@@ -8,7 +9,7 @@ const routes: RouteObject[] = [
     path: "/",
     children: [
       {
-        element: <>Home</>,
+        element: <LandingPage />,
         path: "",
       },
       {

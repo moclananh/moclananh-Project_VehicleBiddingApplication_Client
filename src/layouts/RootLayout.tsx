@@ -1,8 +1,10 @@
 import { AppShell, Box, Burger, Button, Group, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconCar, IconLogin } from "@tabler/icons-react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import NavButton from "../components/nav-button/NavButton";
 export function RootLayout() {
+  const navigate = useNavigate();
   const [opened, { toggle }] = useDisclosure();
   return (
     <AppShell padding={0} header={{ height: 60 }} navbar={{ width: 300, breakpoint: "sm", collapsed: { desktop: true, mobile: !opened } }}>
@@ -10,6 +12,7 @@ export function RootLayout() {
         <Group h="100%" px="md">
           <Group justify="space-between" style={{ flex: 1 }}>
             <Group
+              onClick={() => navigate("/")}
               style={{
                 cursor: "pointer",
               }}
@@ -17,7 +20,7 @@ export function RootLayout() {
               <Box
                 h="50px"
                 w="50px"
-                bg={"pale-blue"}
+                bg={"blue-gray"}
                 style={{
                   borderRadius: "50%",
                   display: "flex",
@@ -30,10 +33,10 @@ export function RootLayout() {
               <Title order={2}>Car bidding</Title>
             </Group>
             <Group gap="md">
-              <Button variant="subtle">Home</Button>
-              <Button variant="subtle">Pricing</Button>
-              <Button variant="subtle">About</Button>
-              <Button variant="subtle">Support</Button>
+              <NavButton to="/">Home</NavButton>
+              <NavButton to="/about">About</NavButton>
+              <NavButton to="/contact">Contact</NavButton>
+              <NavButton to="/contact">Pricing</NavButton>
             </Group>
 
             <Group ml="xl" gap={20} visibleFrom="sm">
