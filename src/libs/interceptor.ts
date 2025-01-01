@@ -1,5 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../constants/endpoint";
+import LocalStorageService from "../services/local-storage.service";
+import { IUser } from "../features/auth/types/auth.type";
 
 // Create an Axios instance
 const http = axios.create({
@@ -10,9 +12,9 @@ const http = axios.create({
 // Request Interceptor
 http.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    const user = LocalStorageService.getItem<IUser>("user");
+    if (user?.token) {
+      config.headers.Authorization = `Bearer ${user.token}`;
     }
 
     return config;

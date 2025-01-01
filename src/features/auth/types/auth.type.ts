@@ -40,3 +40,16 @@ export const LoginSchema = z.object({
 
 export type ILogin = z.infer<typeof LoginSchema>;
 export type IRegister = z.infer<typeof RegisterSchema>;
+
+export enum Role {
+  Admin = "Admin",
+  Dealer = "Dealer",
+}
+export interface IUser {
+  id: string;
+  userName: string;
+  email: string;
+  role: Role;
+  budget: number;
+  token: string;
+}

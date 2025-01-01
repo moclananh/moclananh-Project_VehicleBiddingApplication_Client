@@ -2,20 +2,22 @@ import React from "react";
 import classes from "./UserCard.module.css";
 import { UnstyledButton, Group, Avatar, Text } from "@mantine/core";
 import { IconChevronRight } from "@tabler/icons-react";
+import { useAuth } from "../../features/auth/hooks/useAuth";
 
 const UserCard = () => {
+  const { user } = useAuth();
   return (
     <UnstyledButton className={classes.user}>
       <Group>
-        <Avatar name="Quoc Viet" radius="xl" color="initials" />
+        <Avatar name={user?.userName} radius="xl" color="initials" />
 
         <div style={{ flex: 1 }}>
           <Text size="sm" fw={500}>
-            Viet Dai Bang
+            {user?.userName}
           </Text>
 
           <Text c="dimmed" size="xs">
-            quocviet@gmail.com
+            {user?.email}
           </Text>
         </div>
 

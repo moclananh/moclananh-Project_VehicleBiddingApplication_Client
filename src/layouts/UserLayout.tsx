@@ -1,9 +1,10 @@
-import { AppShell, Button, Divider, Group, Skeleton, Stack } from "@mantine/core";
+import { AppShell, Button, Divider, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import UserCard from "../components/user-card/UserCard";
 import { IconBasketDollar, IconCar, IconLogout, IconReport } from "@tabler/icons-react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import NavButton from "../components/nav-button/NavButton";
+import UserCard from "../components/user-card/UserCard";
+import { useAuth } from "../features/auth/hooks/useAuth";
 const NAV_LINKS = [
   {
     label: "Cars",
@@ -24,6 +25,8 @@ const NAV_LINKS = [
 const UserLayout = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+  const { removeUserState } = useAuth();
+  const navigate = useNavigate();
   return (
     <AppShell
       navbar={{
@@ -44,7 +47,16 @@ const UserLayout = () => {
               </NavButton>
             ))}
           </Stack>
-          <Button color="red" c="white" rightSection={<IconLogout />} fullWidth>
+          <Button
+            onClick={() => {
+              removeUserState();
+              navigate("/");
+            }}
+            color="red"
+            c="white"
+            rightSection={<IconLogout />}
+            fullWidth
+          >
             Logout
           </Button>
         </Stack>

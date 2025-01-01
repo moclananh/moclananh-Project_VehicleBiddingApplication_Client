@@ -1,6 +1,7 @@
-import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from "@tabler/icons-react";
+import { IconGasStation, IconGauge, IconManualGearbox, IconUsers, IconPalette } from "@tabler/icons-react";
 import { Badge, Button, Card, Center, Group, Image, Text } from "@mantine/core";
 import classes from "./CarCard.module.css";
+import { IVehicle } from "../../types/cars.type";
 
 const mockdata = [
   { label: "4 passengers", icon: IconUsers },
@@ -8,8 +9,17 @@ const mockdata = [
   { label: "Automatic gearbox", icon: IconManualGearbox },
   { label: "Electric", icon: IconGasStation },
 ];
-
-export function CarCard() {
+interface CarCardProps {
+  car?: IVehicle;
+}
+const statusMapping: Record<string, string> = {
+  Available: "green",
+  Sold: "yellow",
+  InBidding: "teal",
+  Unavailable: "gray",
+  Default: "blue",
+};
+export function CarCard({ car }: CarCardProps) {
   const features = mockdata.map((feature) => (
     <Center key={feature.label}>
       <feature.icon size={16} className={classes.icon} stroke={1.5} />
@@ -20,17 +30,19 @@ export function CarCard() {
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image src="https://i.imgur.com/ZL52Q2D.png" alt="Tesla Model S" />
+        <Image h={"100%"} mih={"230px"} radius={"sm"} w={"100%"} src={car?.imageUrl} alt="Tesla Model S" />
       </Card.Section>
 
       <Group justify="space-between" mt="md">
         <div>
-          <Text fw={500}>Tesla Model S</Text>
+          <Text fw={500}>{car?.name}</Text>
           <Text fz="xs" c="dimmed">
             Free recharge at any station
           </Text>
         </div>
-        <Badge variant="outline">25% off</Badge>
+        <Badge variant="outline" color={statusMapping[car?.status ?? "Default"]}>
+          {car?.status}
+        </Badge>
       </Group>
 
       <Card.Section className={classes.section} mt="md">
@@ -40,6 +52,10 @@ export function CarCard() {
 
         <Group gap={8} mb={-8}>
           {features}
+          <Center>
+            <IconPalette size={16} className={classes.icon} stroke={1.5} />
+            <Text size="xs">{car?.color}</Text>
+          </Center>
         </Group>
       </Card.Section>
 
@@ -47,15 +63,12 @@ export function CarCard() {
         <Group gap={30}>
           <div>
             <Text fz="xl" fw={700} style={{ lineHeight: 1 }}>
-              $168.00
-            </Text>
-            <Text fz="sm" c="dimmed" fw={500} style={{ lineHeight: 1 }} mt={3}>
-              per day
+              ${car?.price}
             </Text>
           </div>
 
           <Button radius="xl" style={{ flex: 1 }}>
-            Rent now
+            View Details
           </Button>
         </Group>
       </Card.Section>
