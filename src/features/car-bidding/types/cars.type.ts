@@ -1,7 +1,7 @@
 export interface IVehicle {
   id: string;
   vin: string;
-  brand: string;
+  brands: string;
   name: string;
   price: number;
   imageUrl: string;

@@ -36,8 +36,8 @@ export function CarCard({ car }: CarCardProps) {
       <Group justify="space-between" mt="md">
         <div>
           <Text fw={500}>{car?.name}</Text>
-          <Text fz="xs" c="dimmed">
-            Free recharge at any station
+          <Text fz="xs" c="dimmed" >
+            {car?.brands}
           </Text>
         </div>
         <Badge variant="outline" color={statusMapping[car?.status ?? "Default"]}>
