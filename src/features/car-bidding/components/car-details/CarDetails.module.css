@@ -1,0 +1,23 @@
+.card {
+  max-width: 100%;
+  margin: auto;
+  background-color: #f8f9fa;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.imageSection {
+  overflow: hidden;
+  border-radius: 8px;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.group {
+  margin-top: 16px;
+}
+
+.stack {
+  margin: 16px 0;
+}

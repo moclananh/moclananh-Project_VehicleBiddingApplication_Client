@@ -1,26 +1,39 @@
-import { IconGasStation, IconGauge, IconManualGearbox, IconUsers, IconPalette } from "@tabler/icons-react";
+import {
+  IconGasStation,
+  IconGauge,
+  IconManualGearbox,
+  IconUsers,
+  IconPalette,
+  IconArchive,
+} from "@tabler/icons-react";
 import { Badge, Button, Card, Center, Group, Image, Text } from "@mantine/core";
 import classes from "./CarCard.module.css";
 import { IVehicle } from "../../types/cars.type";
+import { useNavigate } from "react-router-dom";
 
-const mockdata = [
-  { label: "4 passengers", icon: IconUsers },
-  { label: "100 km/h in 4 seconds", icon: IconGauge },
-  { label: "Automatic gearbox", icon: IconManualGearbox },
-  { label: "Electric", icon: IconGasStation },
-];
 interface CarCardProps {
   car?: IVehicle;
+  onViewDetails: () => void;
 }
 const statusMapping: Record<string, string> = {
   Available: "green",
   Sold: "yellow",
-  InBidding: "teal",
+  InBidding: "blue",
   Unavailable: "gray",
-  Default: "blue",
+  Default: "black",
 };
-export function CarCard({ car }: CarCardProps) {
-  const features = mockdata.map((feature) => (
+
+export function CarCard({ car, onViewDetails }: CarCardProps) {
+  const navigate = useNavigate();
+  const features = [
+    { label: `${car?.numberOfChairs ?? "N/A"} passengers`, icon: IconUsers },
+    { label: `${car?.horsepower ?? "N/A"} horsepower`, icon: IconGauge },
+    { label: `${car?.maximumSpeed ?? "N/A"} km/h`, icon: IconManualGearbox },
+    {
+      label: `${car?.trunkCapacity ?? "N/A"} L trunk capacity`,
+      icon: IconArchive,
+    },
+  ].map((feature) => (
     <Center key={feature.label}>
       <feature.icon size={16} className={classes.icon} stroke={1.5} />
       <Text size="xs">{feature.label}</Text>
@@ -30,17 +43,27 @@ export function CarCard({ car }: CarCardProps) {
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image h={"100%"} mih={"230px"} radius={"sm"} w={"100%"} src={car?.imageUrl} alt="Tesla Model S" />
+        <Image
+          h={"100%"}
+          mih={"180px"}
+          radius={"sm"}
+          w={"100%"}
+          src={car?.imageUrl}
+          alt={car?.imageUrl}
+        />
       </Card.Section>
 
       <Group justify="space-between" mt="md">
         <div>
           <Text fw={500}>{car?.name}</Text>
-          <Text fz="xs" c="dimmed" >
+          <Text fz="xs" c="dimmed">
             {car?.brands}
           </Text>
         </div>
-        <Badge variant="outline" color={statusMapping[car?.status ?? "Default"]}>
+        <Badge
+          variant="outline"
+          color={statusMapping[car?.status ?? "Default"]}
+        >
           {car?.status}
         </Badge>
       </Group>
@@ -67,7 +90,7 @@ export function CarCard({ car }: CarCardProps) {
             </Text>
           </div>
 
-          <Button radius="xl" style={{ flex: 1 }}>
+          <Button radius="xl" style={{ flex: 1 }} onClick={onViewDetails}>
             View Details
           </Button>
         </Group>

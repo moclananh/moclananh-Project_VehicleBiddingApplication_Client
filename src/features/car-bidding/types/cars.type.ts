@@ -8,6 +8,10 @@ export interface IVehicle {
   status: string;
   description: string;
   color: string;
+  numberOfChairs: number;
+  horsepower: number;
+  maximumSpeed: number;
+  trunkCapacity: number;
 }
 export interface IVehicleWithMetaData {
   items: IVehicle[];

@@ -1,6 +1,11 @@
 import { AppShell, Button, Divider, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconBasketDollar, IconCar, IconLogout, IconReport } from "@tabler/icons-react";
+import {
+  IconBasketDollar,
+  IconCar,
+  IconLogout,
+  IconReport,
+} from "@tabler/icons-react";
 import { Outlet, useNavigate } from "react-router-dom";
 import NavButton from "../components/nav-button/NavButton";
 import UserCard from "../components/user-card/UserCard";
@@ -42,7 +47,14 @@ const UserLayout = () => {
         <Stack flex={1} pb="sm" p="sm" justify="space-between">
           <Stack>
             {NAV_LINKS.map((link) => (
-              <NavButton justify="start" fontSize="md" fullWidth to={link.to} key={link.label} startIcon={<link.icon size={25} stroke={1.5} />}>
+              <NavButton
+                justify="start"
+                fontSize="md"
+                fullWidth
+                to={link.to}
+                key={link.label}
+                startIcon={<link.icon size={25} stroke={1.5} />}
+              >
                 {link.label}
               </NavButton>
             ))}

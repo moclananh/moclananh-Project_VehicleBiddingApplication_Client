@@ -1,5 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Anchor, Button, PasswordInput, Text, TextInput, Title } from "@mantine/core";
+import {
+  Anchor,
+  Button,
+  PasswordInput,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -33,7 +40,12 @@ const LoginForm = () => {
       <Title ta="center">Welcome back!</Title>
       <Text c="dimmed" size="sm" ta="center" mt={5}>
         Do not have an account yet?{" "}
-        <Anchor underline="always" size="sm" component="button" onClick={() => setSearchParams({ form: "register" })}>
+        <Anchor
+          underline="always"
+          size="sm"
+          component="button"
+          onClick={() => setSearchParams({ form: "register" })}
+        >
           Create account
         </Anchor>
       </Text>
@@ -41,13 +53,26 @@ const LoginForm = () => {
       <Controller
         control={control}
         name="email"
-        render={({ field, fieldState: { error } }) => <TextInput {...field} label="Email" placeholder="user@exmaple.com" error={error?.message} />}
+        render={({ field, fieldState: { error } }) => (
+          <TextInput
+            {...field}
+            label="Email"
+            placeholder="user@exmaple.com"
+            error={error?.message}
+          />
+        )}
       />
       <Controller
         control={control}
         name="password"
         render={({ field, fieldState: { error } }) => (
-          <PasswordInput {...field} label="Password" placeholder="Your password" error={error?.message} mt="md" />
+          <PasswordInput
+            {...field}
+            label="Password"
+            placeholder="Your password"
+            error={error?.message}
+            mt="md"
+          />
         )}
       />
 
