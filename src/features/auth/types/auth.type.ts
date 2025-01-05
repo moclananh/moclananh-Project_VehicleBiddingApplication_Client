@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const RegisterSchema = z
   .object({
-    username: z.string({
+    userName: z.string({
       required_error: "Username is required",
     }),
     email: z
@@ -39,7 +39,7 @@ export const LoginSchema = z.object({
 });
 
 export type ILogin = z.infer<typeof LoginSchema>;
-export type IRegister = z.infer<typeof RegisterSchema>;
+export type RegisterFormField = z.infer<typeof RegisterSchema>;
 
 export enum Role {
   Admin = "Admin",
@@ -53,3 +53,4 @@ export interface IUser {
   budget: number;
   token: string;
 }
+export type UserRegister = Omit<IUser, "id" | "token"> & { password: string };

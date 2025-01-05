@@ -1,42 +1,24 @@
-import { IconGasStation, IconGauge, IconManualGearbox, IconUsers, IconPalette } from "@tabler/icons-react";
 import { Badge, Button, Card, Center, Group, Image, Text } from "@mantine/core";
-import classes from "./CarCard.module.css";
+import { IconGauge, IconHorse, IconPalette, IconUsers } from "@tabler/icons-react";
+import { statusMapping } from "../../../../constants/ui";
 import { IVehicle } from "../../types/cars.type";
+import classes from "./CarCard.module.css";
 
-const mockdata = [
-  { label: "4 passengers", icon: IconUsers },
-  { label: "100 km/h in 4 seconds", icon: IconGauge },
-  { label: "Automatic gearbox", icon: IconManualGearbox },
-  { label: "Electric", icon: IconGasStation },
-];
 interface CarCardProps {
   car?: IVehicle;
 }
-const statusMapping: Record<string, string> = {
-  Available: "green",
-  Sold: "yellow",
-  InBidding: "teal",
-  Unavailable: "gray",
-  Default: "blue",
-};
-export function CarCard({ car }: CarCardProps) {
-  const features = mockdata.map((feature) => (
-    <Center key={feature.label}>
-      <feature.icon size={16} className={classes.icon} stroke={1.5} />
-      <Text size="xs">{feature.label}</Text>
-    </Center>
-  ));
 
+export function CarCard({ car }: CarCardProps) {
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image h={"100%"} mih={"230px"} radius={"sm"} w={"100%"} src={car?.imageUrl} alt="Tesla Model S" />
+        <Image h={"100%"} w={"100%"} src={car?.imageUrl} alt="Tesla Model S" />
       </Card.Section>
 
       <Group justify="space-between" mt="md">
         <div>
           <Text fw={500}>{car?.name}</Text>
-          <Text fz="xs" c="dimmed" >
+          <Text fz="xs" c="dimmed">
             {car?.brands}
           </Text>
         </div>
@@ -51,7 +33,18 @@ export function CarCard({ car }: CarCardProps) {
         </Text>
 
         <Group gap={8} mb={-8}>
-          {features}
+          <Center>
+            <IconHorse size={16} className={classes.icon} stroke={1.5} />
+            <Text size="xs">{car?.horsepower + "hp"}</Text>
+          </Center>
+          <Center>
+            <IconGauge size={16} className={classes.icon} stroke={1.5} />
+            <Text size="xs">{car?.maximumSpeed + "km/h"}</Text>
+          </Center>
+          <Center>
+            <IconUsers size={16} className={classes.icon} stroke={1.5} />
+            <Text size="xs">{car?.numberOfChairs + " seats"}</Text>
+          </Center>
           <Center>
             <IconPalette size={16} className={classes.icon} stroke={1.5} />
             <Text size="xs">{car?.color}</Text>

@@ -1,5 +1,5 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { IFilter } from "../components/filter-box/FilterBox";
+import { IFilter } from "../components/filter-box/VehicleFilter";
 import { VehicleService } from "../../../services/vehicle.service";
 
 export const useVehicles = (filter: IFilter | null) => {

@@ -1,4 +1,4 @@
-import { AppShell, Button, Divider, Stack } from "@mantine/core";
+import { AppShell, Burger, Button, Divider, Group, Stack, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconBasketDollar, IconCar, IconLogout, IconReport } from "@tabler/icons-react";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -23,19 +23,11 @@ const NAV_LINKS = [
   },
 ];
 const UserLayout = () => {
-  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
-  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+  const [opened, { toggle }] = useDisclosure();
   const { removeUserState } = useAuth();
   const navigate = useNavigate();
   return (
-    <AppShell
-      navbar={{
-        width: 300,
-        breakpoint: "sm",
-        collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
-      }}
-      padding="md"
-    >
+    <AppShell navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }} padding="md">
       <AppShell.Navbar>
         <UserCard />
         <Divider />
