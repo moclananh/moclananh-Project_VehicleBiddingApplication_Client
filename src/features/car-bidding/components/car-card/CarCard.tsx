@@ -1,5 +1,5 @@
 import { Badge, Button, Card, Center, Group, Image, Text } from "@mantine/core";
-import { IconGauge, IconHorse, IconPalette, IconUsers, IconArchive } from "@tabler/icons-react";
+import { IconGauge, IconHorse, IconPalette, IconUsers } from "@tabler/icons-react";
 import { statusMapping } from "../../../../constants/ui";
 import { IVehicle } from "../../types/cars.type";
 import classes from "./CarCard.module.css";
@@ -50,7 +50,6 @@ export function CarCard({ car, onViewDetails }: CarCardProps) {
             <IconPalette size={16} className={classes.icon} stroke={1.5} />
             <Text size="xs">{car?.color}</Text>
           </Center>
-         
         </Group>
       </Card.Section>
 

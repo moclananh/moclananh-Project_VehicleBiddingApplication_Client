@@ -5,6 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import UserLayout from "./layouts/UserLayout";
 import CarsPage from "./pages/CarsPage";
 import BiddingSessionPage from "./pages/BiddingSessionPage";
+import CarDetailsPage from "./pages/CarDetailsPage";
 
 const routes: RouteObject[] = [
   {
@@ -28,6 +29,10 @@ const routes: RouteObject[] = [
       {
         path: "cars",
         element: <CarsPage />,
+      },
+      {
+        path: "cars/:carId",
+        element: <CarDetailsPage />,
       },
       {
         path: "sessions",
