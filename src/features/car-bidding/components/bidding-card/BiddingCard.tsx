@@ -1,5 +1,5 @@
 import { Badge, Button, Card, ColorSwatch, Divider, Group, Image, Stack, Text } from "@mantine/core";
-import { IconGauge, IconHorse, IconPalette, IconUsers } from "@tabler/icons-react";
+import { IconGauge, IconHorse, IconPalette, IconUsers, IconArchive } from "@tabler/icons-react";
 import { statusMapping } from "../../../../constants/ui";
 import { IBiddingSession } from "../../types/sessions.type";
 import classes from "./BiddingCard.module.css";
@@ -56,6 +56,10 @@ const BiddingCard = ({ session }: BiddingCardProps) => {
               <Text size="md">{vehicles.numberOfChairs + "seats"}</Text>
             </Group>
             <Group gap="xs">
+              <IconArchive size={20} stroke={1.5} />
+              <Text size="md">{vehicles.trunkCapacity + "L"}</Text>
+            </Group>
+            <Group gap="xs">
               <IconPalette size={20} stroke={1.5} />
               <ColorSwatch color={vehicles.color} size={"15"} />
             </Group>
@@ -81,7 +85,7 @@ const BiddingCard = ({ session }: BiddingCardProps) => {
             <Text c={"dimmed"} fw="bold" fs="italic">
               Total bidding:
             </Text>
-            <Text>30 Bids</Text>
+            <Text>{session.totalBiddingCount}</Text>
           </Group>
           <Button color="blue">Bid Now!!</Button>
         </Stack>

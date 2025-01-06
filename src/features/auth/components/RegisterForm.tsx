@@ -6,9 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthService } from "../../../services/auth.service";
 import toast from "react-hot-toast";
 import { handleAxiosError } from "../../../libs/error";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const navigate = useNavigate();
   const [_, setSearchParams] = useSearchParams();
   const {
     control,
@@ -24,11 +26,12 @@ const RegisterForm = () => {
       email: data.email,
       password: data.password,
       role: Role.Dealer,
-      budget: 0,
+      budget: 1000,
     };
     try {
       const response = await AuthService.register(request);
       toast.success(response.message);
+      navigate("/auth/", { replace: true });
     } catch (e) {
       handleAxiosError(e);
     }

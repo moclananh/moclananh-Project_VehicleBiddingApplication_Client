@@ -6,6 +6,9 @@ import { CarCard } from "../features/car-bidding/components/car-card/CarCard";
 import CarsSkeleton from "../features/car-bidding/components/cars-skeleton/CarsSkeleton";
 import VehicleFilter from "../features/car-bidding/components/filter-box/VehicleFilter";
 import { useVehicles } from "../features/car-bidding/hooks/useVehicle";
+import { CarDetails } from "../features/car-bidding/components/car-details/CarDetails";
+import { IVehicle } from "../features/car-bidding/types/cars.type";
+import { useState } from "react";
 
 const CarsPage = () => {
   const { data: responseData, isLoading } = useVehicles(null);
@@ -17,6 +20,29 @@ const CarsPage = () => {
     total: totalPages,
     initialPage: 1,
   });
+
+    // State to track the selected car
+    const [selectedCar, setSelectedCar] = useState<IVehicle | null>(null);
+
+    // Handler to set the selected car for details view
+    const handleViewDetails = (car: IVehicle) => {
+      setSelectedCar(car);
+    };
+  
+    // Handler to reset and show the listing
+    const handleBackToListing = () => {
+      setSelectedCar(null);
+    };
+  
+    // Show the details page if a car is selected
+    if (selectedCar) {
+      return (
+        <Stack align="center">
+          <CarDetails car={selectedCar} onBack={handleBackToListing} />
+        </Stack>
+      );
+    }
+
   if (isLoading) return <CarsSkeleton />;
 
   return (
@@ -33,7 +59,11 @@ const CarsPage = () => {
         }}
       >
         {vehicles.map((vehicle) => (
-          <CarCard key={vehicle.id} car={vehicle} />
+         <CarCard
+            key={vehicle.id}
+            car={vehicle}
+            onViewDetails={() => handleViewDetails(vehicle)}
+          />
         ))}
       </SimpleGrid>
       <Pagination total={totalPages} radius="xl" onChange={pagination.setPage} onNextPage={pagination.next} onPreviousPage={pagination.previous} />

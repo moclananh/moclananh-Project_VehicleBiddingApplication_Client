@@ -5,7 +5,7 @@ export interface IBiddingSession {
   id: string;
   startTime: string;
   endTime: string;
-  totalBiddingCounts: number;
+  totalBiddingCount: number;
   highestBidding: number;
   miniumJumpingValue: number;
   isActive: boolean;
