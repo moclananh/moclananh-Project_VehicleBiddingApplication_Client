@@ -1,7 +1,6 @@
 import { Box, Button, Group, Popover, Select, SimpleGrid, TextInput } from "@mantine/core";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
-import { defaultTo } from "lodash";
-import { brandOptions, GlobalFilter, statusOptions } from "../../../../constants/ui";
+import { brandOptions, statusOptions } from "../../../../constants/ui";
 
 export interface IFilter {
   name: string | null;
