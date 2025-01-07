@@ -1,13 +1,14 @@
 import { ComboboxItem } from "@mantine/core";
-import { IFilter } from "../features/car-bidding/components/filter-box/VehicleFilter";
-import { VehicleStatus } from "../features/car-bidding/types/cars.type";
+import { IVehicleFilter, VehicleStatus } from "../features/car-bidding/types/cars.type";
+import { IReportFilter } from "../features/user/types/filter.type";
+import { IBiddingFilter } from "../features/car-bidding/types/sessions.type";
 
 export const CarImageList = ["/car-images/car1.jpg", "/car-images/car2.jpg", "/car-images/car3.jpg", "/car-images/car4.jpg", "/car-images/car5.jpg"];
 export class GlobalFilter {
   static readonly DEFAULT_PAGE_SIZE = 12;
   static readonly DEFAULT_TOTAL_ITEM = 0;
   static readonly DEFAULT_PAGE_NUMBER = 1;
-  static readonly DEFAULT_FILTER: IFilter = {
+  static readonly DEFAULT_VEHICLE_FILTER: IVehicleFilter = {
     name: null,
     brands: null,
     vin: null,
@@ -15,6 +16,24 @@ export class GlobalFilter {
     status: null,
     pageNumber: GlobalFilter.DEFAULT_PAGE_NUMBER,
     pageSize: GlobalFilter.DEFAULT_PAGE_SIZE,
+  };
+  static readonly DEFAULT_REPORT_FILTER: IReportFilter = {
+    isWinner: null,
+    endDate: null,
+    isClosed: null,
+    startDate: null,
+    vin: null,
+    vehicleName: null,
+    pageNumber: GlobalFilter.DEFAULT_PAGE_NUMBER,
+    pageSize: GlobalFilter.DEFAULT_PAGE_SIZE,
+  };
+  static readonly DEFAULT_SESSION_FILTER: IBiddingFilter = {
+    isActive: null,
+    startTime: null,
+    endTime: null,
+    VIN: null,
+    PageNumber: GlobalFilter.DEFAULT_PAGE_NUMBER,
+    PageSize: GlobalFilter.DEFAULT_PAGE_SIZE,
   };
 }
 export const statusMapping: Record<VehicleStatus | "Default", string> = {

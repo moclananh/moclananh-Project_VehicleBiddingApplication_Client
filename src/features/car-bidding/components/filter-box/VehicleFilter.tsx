@@ -1,25 +1,16 @@
 import { Box, Button, Group, Popover, Select, SimpleGrid, TextInput } from "@mantine/core";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
 import { brandOptions, statusOptions } from "../../../../constants/ui";
+import { IVehicleFilter } from "../../types/cars.type";
 
-export interface IFilter {
-  name: string | null;
-  brands: string | null;
-  vin: string | null;
-  color: string | null;
-  status: string | null;
-  pageNumber: number | null;
-  pageSize: number | null;
-}
-export interface IVehicleFilter {
+export interface VehicleFilterProps {
   onSearchChange: (search: string) => void;
-  onFilterChange: (filter: Partial<IFilter>) => void;
+  onFilterChange: (filter: Partial<IVehicleFilter>) => void;
   onClearFilter: () => void;
-  filter: Partial<IFilter>;
+  filter: Partial<IVehicleFilter>;
 }
 
-const VehicleFilter = ({ onSearchChange, filter, onFilterChange, onClearFilter }: IVehicleFilter) => {
-  console.log(filter);
+const VehicleFilter = ({ onSearchChange, filter, onFilterChange, onClearFilter }: VehicleFilterProps) => {
   return (
     <Group>
       <TextInput

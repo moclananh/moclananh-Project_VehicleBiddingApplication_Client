@@ -6,11 +6,13 @@ import { GlobalFilter } from "../constants/ui";
 import { CarCard } from "../features/car-bidding/components/car-card/CarCard";
 import CarsSkeleton from "../features/car-bidding/components/cars-skeleton/CarsSkeleton";
 import VehicleFilter from "../features/car-bidding/components/filter-box/VehicleFilter";
-import { useFilter, useVehicles } from "../features/car-bidding/hooks/useVehicle";
+import { useVehicles } from "../features/car-bidding/hooks/useVehicle";
 import { isEmpty } from "lodash";
+import { IVehicleFilter } from "../features/car-bidding/types/cars.type";
+import { useFilter } from "../hooks/useFilter";
 
 const CarsPage = () => {
-  const { filter, setFilter } = useFilter(GlobalFilter.DEFAULT_FILTER);
+  const { filter, setFilter } = useFilter<IVehicleFilter>(GlobalFilter.DEFAULT_VEHICLE_FILTER);
   const { data: responseData, isLoading } = useVehicles(filter);
   const totalItems = responseData?.data.itemCounts ?? GlobalFilter.DEFAULT_TOTAL_ITEM;
   const pageSize = responseData?.data.pageSize ?? GlobalFilter.DEFAULT_PAGE_SIZE;
@@ -30,7 +32,7 @@ const CarsPage = () => {
     <Stack align="center" px="xl">
       <Group w="100%" justify="flex-start">
         <VehicleFilter
-          onClearFilter={() => setFilter(GlobalFilter.DEFAULT_FILTER)}
+          onClearFilter={() => setFilter(GlobalFilter.DEFAULT_VEHICLE_FILTER)}
           onFilterChange={(filter) => setFilter(filter)}
           onSearchChange={(search) => {
             setFilter({

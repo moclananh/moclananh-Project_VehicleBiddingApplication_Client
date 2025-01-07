@@ -13,4 +13,12 @@ export interface IBiddingSession {
   vehicleId: number;
   vehicles: IVehicle;
 }
+export interface IBiddingFilter {
+  isActive: boolean | null;
+  startTime: string | null;
+  endTime: string | null;
+  VIN: string | null;
+  PageNumber: number | null;
+  PageSize: number | null;
+}
 export type IBiddingSessionWithMetaData = WithMetaData<IBiddingSession>;
