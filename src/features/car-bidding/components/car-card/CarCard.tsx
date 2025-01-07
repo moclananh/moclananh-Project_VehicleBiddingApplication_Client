@@ -19,8 +19,11 @@ export function CarCard({ car, onViewDetails }: CarCardProps) {
       <Group justify="space-between" mt="md">
         <div>
           <Text fw={500}>{car?.name}</Text>
-          <Text fz="xs" c="dimmed">
+          {/* <Text fz="xs" c="dimmed">
             {car?.brands}
+          </Text> */}
+          <Text fz="xs" c="dimmed">
+            {car?.vin}
           </Text>
         </div>
         <Badge variant="outline" color={statusMapping[car?.status ?? "Default"]}>

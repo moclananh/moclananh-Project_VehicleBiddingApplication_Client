@@ -10,4 +10,5 @@ export const VEHICLES_ENDPOINT = "/vehicles";
 
 export const BIDDING_ENDPOINT = "/biddings";
 
-export const BIDDING_SESSION_ENDPOINT = "/session";
+export const BIDDING_SESSION_ENDPOINT = "/sessions";
+export const USER_ENDPOINT = "/users";

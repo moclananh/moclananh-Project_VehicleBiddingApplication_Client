@@ -29,7 +29,7 @@ const BiddingCard = ({ session }: BiddingCardProps) => {
             </Badge>
           </Group>
           <Text fz="sm" c="dimmed">
-            {vehicles.brands}
+            {vehicles.vin}
           </Text>
           <Text
             fz="sm"
