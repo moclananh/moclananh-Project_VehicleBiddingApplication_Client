@@ -6,6 +6,7 @@ import UserLayout from "./layouts/UserLayout";
 import CarsPage from "./pages/CarsPage";
 import BiddingSessionPage from "./pages/BiddingSessionPage";
 import CarDetailsPage from "./pages/CarDetailsPage";
+import ReportPage from "./pages/ReportPage";
 
 const routes: RouteObject[] = [
   {
@@ -40,7 +41,7 @@ const routes: RouteObject[] = [
       },
       {
         path: "report",
-        element: <div>Report</div>,
+        element: <ReportPage />,
       },
     ],
   },
