@@ -1,5 +1,4 @@
-import { Badge, Card, Group, Image, Stack, Text } from "@mantine/core";
-import classes from "./ReportCard.module.css";
+import { Badge, Group, Image, Text } from "@mantine/core";
 import { IReport } from "../../types/report.type";
 
 interface ReportCardProps {
@@ -7,51 +6,51 @@ interface ReportCardProps {
 }
 
 export function ReportCard({ report }: ReportCardProps) {
+  if (!report) return null;
+
   return (
-    <Card withBorder radius="md" className={classes.card}>
-      {/* Image Section */}
-      <Card.Section className={classes.imageSection}>
-        <Image
-          h={"100%"}
-          w={"100%"}
-          src={report?.imageUrl || "/placeholder-image.png"} // Fallback image
-          alt={report?.vehicleName || "Vehicle Image"}
-        />
-      </Card.Section>
-
-      {/* Vehicle and Bidding Details */}
-      <Stack mt="md">
-        <Text fw={500}>{report?.vehicleName || "Unknown Vehicle"}</Text>
-        <Text fz="sm" c="dimmed">VIN: {report?.vin || "N/A"}</Text>
-       
-
-        {/* Bidding Details */}
-        
-        <Text fz="sm">
-          Bidding Value: ${report?.userCurrentBidding || 0}
-        </Text>
-
-        {/* Status Information */}
-        <Group >
-          <Badge color={report?.isWinner ? "green" : "red"}>
-            {report?.isWinner ? "Winner" : "Defeated"}
-          </Badge>
-          <Badge color={report?.isClosed ? "gray" : "blue"}>
-            {report?.isClosed ? "Closed" : "In Bidding"}
-          </Badge>
+    <tr style={{ borderBottom: "1px solid #eaeaea" }}>
+      <td>
+        <Group>
+          <Image
+            src={report.imageUrl || "https://via.placeholder.com/100"}
+            alt={report.vehicleName || "Unknown Vehicle"}
+            width={80}
+            height={80}
+            radius="md"
+            fit="cover" // Ensures the image fills the space while maintaining its aspect ratio
+          />
+          <Text fw={500}>{report.vehicleName || "Unknown Vehicle"}</Text>
         </Group>
+      </td>
 
-        {/* Session Timing */}
-        <Text fz="sm">
-          Start Time: {report?.startTime ? new Date(report.startTime).toLocaleString() : "N/A"}
+      <td>
+        <Text fz="sm" c="dimmed">
+          {report.vin || "N/A"}
         </Text>
-        <Text fz="sm">
-          End Time: {report?.endTime ? new Date(report.endTime).toLocaleString() : "N/A"}
+      </td>
+      <td>
+        <Badge color={report.isClosed ? "gray" : "blue"} variant="light">
+          {report.isClosed ? "Closed" : "In Bidding"}
+        </Badge>
+      </td>
+      <td>
+        <Text fw={500} color="teal">
+          ${report.userCurrentBidding || 0}
         </Text>
+      </td>
+      <td>
+        <Badge color={report.isWinner ? "green" : "red"} variant="filled">
+          {report.isWinner ? "Winner" : "Defeated"}
+        </Badge>
+      </td>
+      <td>
         <Text fz="sm">
-          Bidding At: {report?.biddingAt ? new Date(report.biddingAt).toLocaleString() : "N/A"}
+          {report.biddingAt
+            ? new Date(report.biddingAt).toLocaleString()
+            : "N/A"}
         </Text>
-      </Stack>
-    </Card>
+      </td>
+    </tr>
   );
 }

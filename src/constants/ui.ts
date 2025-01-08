@@ -19,9 +19,9 @@ export class GlobalFilter {
   };
   static readonly DEFAULT_REPORT_FILTER: IReportFilter = {
     isWinner: null,
-    endDate: null,
+    endTime: null,
     isClosed: null,
-    startDate: null,
+    startTime: null,
     vin: null,
     vehicleName: null,
     pageNumber: GlobalFilter.DEFAULT_PAGE_NUMBER,

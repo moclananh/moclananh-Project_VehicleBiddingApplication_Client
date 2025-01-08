@@ -1,3 +1,4 @@
+import { WithMetaData } from "../../../types/api-response";
 export interface IReportFilter {
   isWinner: boolean | null;
   startTime: string | null;
@@ -8,3 +9,4 @@ export interface IReportFilter {
   pageNumber: number | null;
   pageSize: number | null;
 }
+export type IReportWithMetaData = WithMetaData<IReportFilter>;

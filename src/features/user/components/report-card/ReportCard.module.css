@@ -1,46 +1,29 @@
 .card {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    background-color: #fff;
-    border: 1px solid #eaeaea;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .imageSection {
-    overflow: hidden;
-    border-bottom: 1px solid #eaeaea;
-  }
-  
-  .image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  .table {
-    width: 100%;
-    margin-top: 16px;
-    border-spacing: 0;
-    border-collapse: collapse;
-  }
-  
-  .label {
-    font-weight: 500;
-    color: #333;
-    padding: 8px;
-    text-align: left;
-    background-color: #f8f9fa;
-  }
-  
-  td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #eaeaea;
-  }
-  
-  td:last-child {
-    text-align: right;
-  }
-  
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
