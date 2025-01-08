@@ -21,4 +21,12 @@ export interface IBiddingFilter {
   PageNumber: number | null;
   PageSize: number | null;
 }
+
+export interface IUserBiddingFilter {
+  startTime: string | null;
+  endTime: string | null;
+  VIN: string | null;
+  PageNumber: number | null;
+  PageSize: number | null;
+}
 export type IBiddingSessionWithMetaData = WithMetaData<IBiddingSession>;

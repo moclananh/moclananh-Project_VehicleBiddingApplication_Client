@@ -1,7 +1,7 @@
 export interface IReportFilter {
   isWinner: boolean | null;
-  startDate: string | null;
-  endDate: string | null;
+  startTime: string | null;
+  endTime: string | null;
   isClosed: boolean | null;
   vehicleName?: string | null;
   vin: string | null;
