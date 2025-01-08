@@ -5,14 +5,45 @@ import { IBiddingSession } from "../../types/sessions.type";
 import classes from "./BiddingCard.module.css";
 import { timeLeft } from "../../../../common/utils";
 import { NumericFormat } from "react-number-format";
+import { isEmpty, isNil } from "lodash";
+import { useNavigate } from "react-router-dom";
 interface BiddingCardProps {
   session: IBiddingSession | null;
 }
 const BiddingCard = ({ session }: BiddingCardProps) => {
+  const navigate = useNavigate();
   if (!session) {
     return null;
   }
+
   const { vehicles } = session;
+  const currentBidding = isEmpty(session.biddings) ? null : session.biddings[0];
+  const updateButtonState = () => {
+    if (isEmpty(session.biddings)) {
+      return {
+        title: "Bid now!!",
+        color: "blue",
+      };
+    }
+    if (currentBidding?.isWinner) {
+      return {
+        title: "Winner",
+        color: "green",
+      };
+    }
+    if (!currentBidding?.isWinner) {
+      return {
+        title: "Bid again!!",
+        color: "red",
+      };
+    }
+
+    return {
+      title: "Bid now!!",
+      color: "blue",
+    };
+  };
+
   return (
     <Card w="100%" withBorder radius={"md"}>
       <Group>
@@ -87,7 +118,9 @@ const BiddingCard = ({ session }: BiddingCardProps) => {
             </Text>
             <Text>{session.totalBiddingCount}</Text>
           </Group>
-          <Button color="blue">Bid Now!!</Button>
+          <Button onClick={() => navigate(`/dashboard/sessions/${session.id}`)} radius={"md"} color={updateButtonState().color}>
+            {updateButtonState().title}
+          </Button>
         </Stack>
       </Group>
     </Card>

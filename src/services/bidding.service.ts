@@ -1,5 +1,5 @@
 import { BIDDING_SESSION_ENDPOINT } from "../constants/endpoint";
-import { IBiddingFilter, IBiddingSessionWithMetaData } from "../features/car-bidding/types/sessions.type";
+import { IBiddingFilter, IBiddingSession, IBiddingSessionWithMetaData } from "../features/car-bidding/types/sessions.type";
 import http from "../libs/interceptor";
 import { ApiResponse } from "../types/api-response";
 export const BiddingService = {
@@ -7,6 +7,10 @@ export const BiddingService = {
     const response = await http.get<ApiResponse<IBiddingSessionWithMetaData>>(BIDDING_SESSION_ENDPOINT, {
       params: filter,
     });
+    return response.data;
+  },
+  getSessionById: async (id: string) => {
+    const response = await http.get<ApiResponse<IBiddingSession>>(`${BIDDING_SESSION_ENDPOINT}/${id}`);
     return response.data;
   },
 };

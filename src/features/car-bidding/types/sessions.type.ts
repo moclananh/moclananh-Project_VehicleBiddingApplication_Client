@@ -11,6 +11,7 @@ export interface IBiddingSession {
   isActive: boolean;
   isClosed: boolean;
   vehicleId: number;
+  biddings: IBidding[];
   vehicles: IVehicle;
 }
 export interface IBiddingFilter {
@@ -29,4 +30,12 @@ export interface IUserBiddingFilter {
   PageNumber: number | null;
   PageSize: number | null;
 }
+export interface IBidding {
+  bidingAt: string;
+  biddingSessionId: string;
+  isWinner: boolean;
+  userCurrentBidding: number;
+  userId: string;
+}
+
 export type IBiddingSessionWithMetaData = WithMetaData<IBiddingSession>;

@@ -11,6 +11,7 @@ const BiddingSessionPage = () => {
   const pageSize = responseData?.data.pageSize ?? GlobalFilter.DEFAULT_PAGE_SIZE;
   const totalPages = calculateTotalPage(totalItems, pageSize);
   const sessions = responseData?.data.items ?? [];
+  console.log(sessions);
   const pagination = usePagination({
     total: totalPages,
     initialPage: 1,

@@ -23,7 +23,7 @@ const NAV_LINKS = [
   },
 ];
 const UserLayout = () => {
-  const [opened, { toggle }] = useDisclosure();
+  const [opened] = useDisclosure();
   const { removeUserState } = useAuth();
   const navigate = useNavigate();
   return (

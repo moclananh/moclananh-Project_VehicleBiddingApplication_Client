@@ -2,10 +2,10 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { UserService } from "../../../services/user.service";
 import LocalStorageService from "../../../services/local-storage.service";
 import { IReportFilter } from "../types/filter.type";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 export const useReport = (filter: Partial<IReportFilter> | null) => {
-  // TODO: Get from use auth instead
-  const user = LocalStorageService.getItem<{ id: string }>("user");
+  const { user } = useAuth();
   const userId = user?.id;
   if (!userId) {
     console.error("User ID not found in local storage or user object is invalid.");

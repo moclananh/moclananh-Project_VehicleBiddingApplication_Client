@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AuthService } from "../../../services/auth.service";
 import { useAuth } from "../hooks/useAuth";
-import { ILogin, LoginSchema } from "../types/auth.type";
+import { ILogin, LoginSchema, Role } from "../types/auth.type";
 import { handleAxiosError } from "../../../libs/error";
 const LoginForm = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -25,9 +25,14 @@ const LoginForm = () => {
       const response = await AuthService.login(data);
       console.log(response);
       setUserState(response.data);
-      navigate("/dashboard/cars", {
-        replace: true,
-      });
+      if (response.data.role === Role.Admin) {
+        navigate("/dashboard/admin", { replace: true });
+      } else {
+        navigate("/dashboard/cars", {
+          replace: true,
+        });
+      }
+
       toast.success(response.message);
     } catch (e) {
       handleAxiosError(e);

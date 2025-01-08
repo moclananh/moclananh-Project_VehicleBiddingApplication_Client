@@ -14,4 +14,3 @@ export interface IReport {
   imageUrl: string;
 }
 export type IUserReportWithMetaData = WithMetaData<IReport>;
-

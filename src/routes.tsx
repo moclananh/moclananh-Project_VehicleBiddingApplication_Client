@@ -7,6 +7,7 @@ import CarsPage from "./pages/CarsPage";
 import BiddingSessionPage from "./pages/BiddingSessionPage";
 import CarDetailsPage from "./pages/CarDetailsPage";
 import ReportPage from "./pages/ReportPage";
+import BiddingDetailsPage from "./pages/BiddingDetailsPage";
 
 const routes: RouteObject[] = [
   {
@@ -40,8 +41,16 @@ const routes: RouteObject[] = [
         element: <BiddingSessionPage />,
       },
       {
+        path: "sessions/:sessionId",
+        element: <BiddingDetailsPage />,
+      },
+      {
         path: "report",
         element: <ReportPage />,
+      },
+      {
+        path: "admin",
+        element: <h1>Admin</h1>,
       },
     ],
   },

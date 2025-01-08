@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Flex, Group, Image, Stack, Text } from "@mantine/core";
+import { Badge, Button, Card, ColorSwatch, Flex, Group, Image, Stack, Text } from "@mantine/core";
 import { IVehicle } from "../../types/cars.type";
 import { IconGauge, IconUsers, IconArchive, IconHorse } from "@tabler/icons-react";
 import classes from "./CarDetails.module.css";
@@ -38,7 +38,9 @@ export function CarDetails({ car, onBack }: CarDetailsProps) {
                 Brand: {car.brands}
               </Text>
             </div>
-            <Badge color={statusMapping[car.status ?? "Default"]}>{car.status}</Badge>
+            <Badge variant="outline" color={statusMapping[car?.status ?? "Default"]}>
+              {car.status}
+            </Badge>
           </Group>
 
           <Text fz="sm" c="dimmed">
@@ -75,17 +77,15 @@ export function CarDetails({ car, onBack }: CarDetailsProps) {
             <Text fz="xl" fw={700} style={{ lineHeight: 1 }}>
               ${car.price.toFixed(2)}
             </Text>
-            <Badge color="blue" size="lg">
-              Color: {car.color}
-            </Badge>
+            <Group>
+              <Text>Color:</Text>
+              <ColorSwatch color={car.color} size={20} />
+            </Group>
           </Group>
         </Stack>
 
         {/* Right: Actions */}
         <Stack style={{ minWidth: "200px" }}>
-          <Button radius="xl" color="blue" disabled={!isBiddingAllowed}>
-            Start Bidding
-          </Button>
           <Button radius="xl" variant="outline" onClick={onBack}>
             Back to Listing
           </Button>
