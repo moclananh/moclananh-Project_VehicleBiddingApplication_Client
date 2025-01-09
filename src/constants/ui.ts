@@ -10,7 +10,7 @@ export class GlobalFilter {
   static readonly DEFAULT_PAGE_NUMBER = 1;
   static readonly DEFAULT_VEHICLE_FILTER: IVehicleFilter = {
     name: null,
-    brands: null,
+    brand: null,
     vin: null,
     color: null,
     status: null,
@@ -32,6 +32,8 @@ export class GlobalFilter {
     startTime: null,
     endTime: null,
     VIN: null,
+    name: null,
+    brand: null,
     pageNumber: GlobalFilter.DEFAULT_PAGE_NUMBER,
     pageSize: GlobalFilter.DEFAULT_PAGE_SIZE,
   };
@@ -40,6 +42,8 @@ export class GlobalFilter {
     startTime: null,
     endTime: null,
     VIN: null,
+    name: null,
+    brand: null,
     pageNumber: GlobalFilter.DEFAULT_PAGE_NUMBER,
     pageSize: GlobalFilter.DEFAULT_PAGE_SIZE,
   };

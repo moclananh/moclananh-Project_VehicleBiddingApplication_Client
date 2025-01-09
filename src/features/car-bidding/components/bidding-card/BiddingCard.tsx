@@ -49,7 +49,7 @@ const BiddingCard = ({ session }: BiddingCardProps) => {
     }
     if (!currentBidding?.isWinner) {
       return {
-        title: "Out of Bid, Bid again",
+        title: "Outbid",
         color: "red",
       };
     }

@@ -44,10 +44,10 @@ const VehicleFilter = ({ onSearchChange, filter, onFilterChange, onClearFilter }
               />
 
               <Select
-                label="Brands"
-                value={filter.brands ?? null}
+                label="Brand"
+                value={filter.brand ?? null}
                 clearable
-                onChange={(value) => onFilterChange({ ...filter, brands: value })}
+                onChange={(value) => onFilterChange({ ...filter, brand: value })}
                 data={brandOptions}
                 placeholder="Select a brand"
                 size="md"

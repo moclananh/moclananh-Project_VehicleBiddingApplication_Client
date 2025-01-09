@@ -17,7 +17,7 @@ export interface IVehicle {
 }
 export interface IVehicleFilter {
   name: string | null;
-  brands: string | null;
+  brand: string | null;
   vin: string | null;
   color: string | null;
   status: string | null;
@@ -33,7 +33,7 @@ export enum VehicleStatus {
 }
 export interface ICreateVehicle {
   vin: string;
-  brands: string;
+  brand: string;
   name: string;
   price: number;
   imageUrl: string;
