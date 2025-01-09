@@ -19,16 +19,16 @@ export interface IBiddingFilter {
   startTime: string | null;
   endTime: string | null;
   VIN: string | null;
-  PageNumber: number | null;
-  PageSize: number | null;
+  pageNumber: number | null;
+  pageSize: number | null;
 }
 
 export interface IUserBiddingFilter {
   startTime: string | null;
   endTime: string | null;
   VIN: string | null;
-  PageNumber: number | null;
-  PageSize: number | null;
+  pageNumber: number | null;
+  pageSize: number | null;
 }
 export interface IBidding {
   bidingAt: string;

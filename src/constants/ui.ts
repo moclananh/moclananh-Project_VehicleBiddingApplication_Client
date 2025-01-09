@@ -32,8 +32,16 @@ export class GlobalFilter {
     startTime: null,
     endTime: null,
     VIN: null,
-    PageNumber: GlobalFilter.DEFAULT_PAGE_NUMBER,
-    PageSize: GlobalFilter.DEFAULT_PAGE_SIZE,
+    pageNumber: GlobalFilter.DEFAULT_PAGE_NUMBER,
+    pageSize: GlobalFilter.DEFAULT_PAGE_SIZE,
+  };
+  static readonly DEFAULT_USER_SESSION_FILTER: IBiddingFilter = {
+    isActive: null,
+    startTime: null,
+    endTime: null,
+    VIN: null,
+    pageNumber: GlobalFilter.DEFAULT_PAGE_NUMBER,
+    pageSize: GlobalFilter.DEFAULT_PAGE_SIZE,
   };
 }
 export const statusMapping: Record<VehicleStatus | "Default", string> = {

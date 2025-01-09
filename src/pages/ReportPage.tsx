@@ -8,7 +8,7 @@ const ReportPage = () => {
   // Hooks to manage filter and fetch data
 
   const [pagination, setPagination] = useState<MRT_PaginationState>({
-    pageIndex: 0, // Convert 1-based to 0-based
+    pageIndex: 0, 
     pageSize: 10,
   });
   const {

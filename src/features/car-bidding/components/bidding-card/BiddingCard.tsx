@@ -1,5 +1,21 @@
-import { Badge, Button, Card, ColorSwatch, Divider, Group, Image, Stack, Text } from "@mantine/core";
-import { IconGauge, IconHorse, IconPalette, IconUsers, IconArchive } from "@tabler/icons-react";
+import {
+  Badge,
+  Button,
+  Card,
+  ColorSwatch,
+  Divider,
+  Group,
+  Image,
+  Stack,
+  Text,
+} from "@mantine/core";
+import {
+  IconGauge,
+  IconHorse,
+  IconPalette,
+  IconUsers,
+  IconArchive,
+} from "@tabler/icons-react";
 import { statusMapping } from "../../../../constants/ui";
 import { IBiddingSession } from "../../types/sessions.type";
 import classes from "./BiddingCard.module.css";
@@ -27,13 +43,13 @@ const BiddingCard = ({ session }: BiddingCardProps) => {
     }
     if (currentBidding?.isWinner) {
       return {
-        title: "Winner",
+        title: "Winning",
         color: "green",
       };
     }
     if (!currentBidding?.isWinner) {
       return {
-        title: "Bid again!!",
+        title: "Out of Bid, Bid again",
         color: "red",
       };
     }
@@ -47,7 +63,13 @@ const BiddingCard = ({ session }: BiddingCardProps) => {
   return (
     <Card w="100%" withBorder radius={"md"}>
       <Group>
-        <Image radius={"md"} h="200px" miw="300px" className={classes.cardImage} src={vehicles.imageUrl} />
+        <Image
+          radius={"md"}
+          h="200px"
+          miw="300px"
+          className={classes.cardImage}
+          src={vehicles.imageUrl}
+        />
         <Divider orientation="vertical" />
         <Stack gap="sm" flex={1}>
           <Group gap={10}>
@@ -106,19 +128,43 @@ const BiddingCard = ({ session }: BiddingCardProps) => {
           </Badge>
           <Group gap="sm">
             <Text c={"dimmed"} fw="bold" fs="italic">
-              Current Value:
+              Current Bid:
             </Text>
             <Text>
-              <NumericFormat displayType="text" value={session.highestBidding} suffix="$" />
+              <NumericFormat
+                displayType="text"
+                value={session.highestBidding}
+                suffix="$"
+              />
             </Text>
           </Group>
+
           <Group gap="sm">
             <Text c={"dimmed"} fw="bold" fs="italic">
               Total bidding:
             </Text>
             <Text>{session.totalBiddingCount}</Text>
           </Group>
-          <Button onClick={() => navigate(`/dashboard/sessions/${session.id}`)} radius={"md"} color={updateButtonState().color}>
+          {currentBidding?.userCurrentBidding != null && (
+            <Group gap="sm">
+              <Text c={"dimmed"} fw="bold" fs="italic">
+                Your Max Bid:
+              </Text>
+              <Text>
+                <NumericFormat
+                  displayType="text"
+                  value={currentBidding.userCurrentBidding}
+                  suffix="$"
+                />
+              </Text>
+            </Group>
+          )}
+          <Button
+            onClick={() => navigate(`/dashboard/sessions/${session.id}`)}
+            radius={"md"}
+            color={updateButtonState().color}
+            disabled={session.isClosed} 
+          >
             {updateButtonState().title}
           </Button>
         </Stack>

@@ -14,7 +14,7 @@ import { useFilter } from "../hooks/useFilter";
 const CarsPage = () => {
   const { filter, setFilter } = useFilter<IVehicleFilter>(GlobalFilter.DEFAULT_VEHICLE_FILTER);
   const { data: responseData, isLoading } = useVehicles(filter);
-  const totalItems = responseData?.data.itemCounts ?? GlobalFilter.DEFAULT_TOTAL_ITEM;
+  const totalItems = responseData?.data.totalItems ?? GlobalFilter.DEFAULT_TOTAL_ITEM;
   const pageSize = responseData?.data.pageSize ?? GlobalFilter.DEFAULT_PAGE_SIZE;
   const totalPages = calculateTotalPage(totalItems, pageSize);
   const vehicles = responseData?.data.items ?? [];
