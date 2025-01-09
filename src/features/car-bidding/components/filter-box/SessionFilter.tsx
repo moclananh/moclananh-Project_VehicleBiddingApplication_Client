@@ -5,13 +5,12 @@ import {
   Popover,
   Select,
   SimpleGrid,
-  TextInput,
-  Text,
+  TextInput
 } from "@mantine/core";
-import { IconFilter, IconSearch } from "@tabler/icons-react";
-import { brandOptions, statusOptions } from "../../../../constants/ui";
-import { IUserBiddingFilter } from "../../types/sessions.type";
 import { DateInput } from "@mantine/dates";
+import { IconFilter, IconSearch } from "@tabler/icons-react";
+import { brandOptions } from "../../../../constants/ui";
+import { IUserBiddingFilter } from "../../types/sessions.type";
 
 export interface SessionFilterProps {
   onSearchChange: (search: string) => void;

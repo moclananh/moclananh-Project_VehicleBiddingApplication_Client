@@ -7,7 +7,7 @@ export interface IBiddingSession {
   endTime: string;
   totalBiddingCount: number;
   highestBidding: number;
-  miniumJumpingValue: number;
+  minimumJumpingValue: number;
   isActive: boolean;
   isClosed: boolean;
   vehicleId: number;

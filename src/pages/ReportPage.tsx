@@ -8,7 +8,7 @@ const ReportPage = () => {
   // Hooks to manage filter and fetch data
 
   const [pagination, setPagination] = useState<MRT_PaginationState>({
-    pageIndex: 0, 
+    pageIndex: 0,
     pageSize: 10,
   });
   const {
@@ -20,7 +20,7 @@ const ReportPage = () => {
     pageNumber: pagination.pageIndex + 1,
     pageSize: pagination.pageSize,
   });
-
+  const totalItems = responseData?.data.totalItems ?? 0;
   const report = responseData?.data.items ?? [];
   const columns = useMemo<MRT_ColumnDef<IReport>[]>(
     () => [
@@ -79,7 +79,7 @@ const ReportPage = () => {
     },
 
     onPaginationChange: setPagination,
-    rowCount: 5,
+    rowCount: totalItems,
   });
 
   return (
