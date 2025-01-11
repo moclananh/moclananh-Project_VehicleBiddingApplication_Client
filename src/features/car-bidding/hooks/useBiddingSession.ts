@@ -25,3 +25,12 @@ export const useBiddingSessionDetails = (id: string) => {
   });
   return query;
 };
+
+export const useBiddingSessionDetailsWithUserState = (userId: string, sessionId: string) => {
+  const query = useQuery({
+    queryKey: ["session-details-with-user-state", userId, sessionId],
+    queryFn: () => BiddingService.getSessionByIdWithUserState(userId, sessionId),
+    placeholderData: keepPreviousData,
+  });
+  return query;
+};
