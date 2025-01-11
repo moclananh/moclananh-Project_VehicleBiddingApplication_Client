@@ -1,4 +1,4 @@
-import { AppShell, Burger, Button, Divider, Group, Stack, Title } from "@mantine/core";
+import { AppShell, Button, Divider, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconBasketDollar, IconCar, IconLogout, IconReport } from "@tabler/icons-react";
 import { Outlet, useNavigate } from "react-router-dom";

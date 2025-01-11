@@ -1,7 +1,9 @@
 import { Button, Card, Divider, Group, NumberInput, Stack, Text } from "@mantine/core";
 import { IconArrowBounce, IconCurrencyDollar, IconHandFingerDown, IconMathMaxMin } from "@tabler/icons-react";
-import { toNumber } from "lodash";
+import { defaultTo, toNumber } from "lodash";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useAuth } from "../../../auth/hooks/useAuth";
 import { IBidding } from "../../types/sessions.type";
 export interface BiddingFormProps {
   highestBidding?: number;
@@ -9,7 +11,15 @@ export interface BiddingFormProps {
   currentUserBidding?: IBidding;
 }
 const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0, currentUserBidding }: BiddingFormProps) => {
+  const { user } = useAuth();
   const [biddingValue, setBiddingValue] = useState<number>(highestBidding + minimumJumpingValue);
+  const handleBidding = () => {
+    if (biddingValue > defaultTo(user?.budget, 0)) {
+      open();
+    } else {
+      toast.success("Successfully Bidded");
+    }
+  };
   useEffect(() => {
     setBiddingValue(highestBidding + minimumJumpingValue);
   }, [highestBidding, minimumJumpingValue]);
@@ -70,8 +80,9 @@ const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0, currentUserB
           </Text>
         </Stack>
       </Group>
-
-      <Button fullWidth>Bid</Button>
+      <Button onClick={handleBidding} fullWidth>
+        Bid
+      </Button>
     </Card>
   );
 };

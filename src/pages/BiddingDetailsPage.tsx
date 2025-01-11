@@ -8,7 +8,6 @@ import BiddingForm from "../features/car-bidding/components/bidding-form/Bidding
 import BiddingHistory from "../features/car-bidding/components/bidding-history/BiddingHistory";
 import { useBiddingSessionDetailsWithUserState } from "../features/car-bidding/hooks/useBiddingSession";
 import { handleAxiosError } from "../libs/error";
-import { IBiddingRequest } from "../features/car-bidding/types/bidding.type";
 
 const BiddingDetailsPage = () => {
   const { user } = useAuth();
@@ -18,7 +17,6 @@ const BiddingDetailsPage = () => {
   if (error) {
     handleAxiosError(error);
   }
-  const handleBidding = (bid: IBiddingRequest) => {};
 
   return (
     <Container size="xl">
