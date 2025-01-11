@@ -1,4 +1,5 @@
 import { WithMetaData } from "../../../types/api-response";
+import { IUser } from "../../auth/types/auth.type";
 import { IVehicle } from "./cars.type";
 
 export interface IBiddingSession {
@@ -11,9 +12,12 @@ export interface IBiddingSession {
   isActive: boolean;
   isClosed: boolean;
   vehicleId: number;
+  userId: string;
+  userBiddingState?: IBidding;
   biddings: IBidding[];
   vehicles: IVehicle;
 }
+
 export interface IBiddingFilter {
   isActive: boolean | null;
   startTime: Date | null;
@@ -35,11 +39,12 @@ export interface IUserBiddingFilter {
   pageSize: number | null;
 }
 export interface IBidding {
-  bidingAt: string;
+  biddingAt: string;
   biddingSessionId: string;
   isWinner: boolean;
   userCurrentBidding: number;
   userId: string;
+  user?: IUser;
 }
 
 export enum VehicleBrands {

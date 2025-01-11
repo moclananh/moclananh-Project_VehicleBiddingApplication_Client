@@ -2,11 +2,13 @@ import { Button, Card, Divider, Group, NumberInput, Stack, Text } from "@mantine
 import { IconArrowBounce, IconCurrencyDollar, IconHandFingerDown, IconMathMaxMin } from "@tabler/icons-react";
 import { toNumber } from "lodash";
 import { useEffect, useState } from "react";
+import { IBidding } from "../../types/sessions.type";
 export interface BiddingFormProps {
   highestBidding?: number;
   minimumJumpingValue?: number;
+  currentUserBidding?: IBidding;
 }
-const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0 }: BiddingFormProps) => {
+const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0, currentUserBidding }: BiddingFormProps) => {
   const [biddingValue, setBiddingValue] = useState<number>(highestBidding + minimumJumpingValue);
   useEffect(() => {
     setBiddingValue(highestBidding + minimumJumpingValue);
@@ -53,12 +55,22 @@ const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0 }: BiddingFor
           setBiddingValue(toNumber(value));
         }}
       />
-      <Stack gap="0">
-        <Text fz="lg">Your bid</Text>
-        <Text fz="h2">
-          <b>${biddingValue}</b>
-        </Text>
-      </Stack>
+      <Group>
+        <Stack gap="0">
+          <Text fz="lg">Your next bid</Text>
+          <Text fz="h2">
+            <b>${biddingValue}</b>
+          </Text>
+        </Stack>
+        <Divider orientation="vertical" />
+        <Stack gap="0">
+          <Text fz="lg">Your max bid</Text>
+          <Text fz="h2">
+            <b>${currentUserBidding?.userCurrentBidding}</b>
+          </Text>
+        </Stack>
+      </Group>
+
       <Button fullWidth>Bid</Button>
     </Card>
   );
