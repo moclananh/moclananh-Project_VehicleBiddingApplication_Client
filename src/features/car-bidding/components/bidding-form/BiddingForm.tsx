@@ -99,7 +99,11 @@ const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0, currentUserB
           </Text>
         </Stack>
       </Group>
-      <Button onClick={handleBidding} fullWidth>
+      <Button 
+        onClick={handleBidding} 
+        fullWidth 
+        disabled={biddingValue < highestBidding + minimumJumpingValue}
+      >
         Bid
       </Button>
     </Card>
