@@ -37,7 +37,7 @@ const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0, currentUserB
         queryKey: ["session-details-with-user", user?.id, sessionId],
       });
 
-      toast.success(response.message);
+      toast.error(response.message);
     } catch (error) {
       handleAxiosError(error);
     }

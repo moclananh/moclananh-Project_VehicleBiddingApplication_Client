@@ -13,6 +13,7 @@ export const useBiddingSession = (filter: Partial<IBiddingFilter> | null) => {
   const query = useQuery({
     queryKey: ["sessions", userId, filter],
     queryFn: () => UserService.getSessionByUserId(userId, filter),
+    refetchOnMount: true,
   });
   return query;
 };
@@ -20,7 +21,6 @@ export const useBiddingSessionDetails = (id: string) => {
   const query = useQuery({
     queryKey: ["session-details", id],
     queryFn: () => BiddingService.getSessionById(id),
-    placeholderData: keepPreviousData,
   });
   return query;
 };
