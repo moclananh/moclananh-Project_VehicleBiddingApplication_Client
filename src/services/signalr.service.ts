@@ -9,19 +9,15 @@ class SignalRService {
   // Initialize the connection
   public async startConnection(): Promise<void> {
     try {
-      this.connection = new HubConnectionBuilder()
-        .withUrl(this.hubUrl)
-        .withAutomaticReconnect() // Enables automatic reconnection
-        .configureLogging(LogLevel.Information) // Optional: Adjust logging level
-        .build();
+      this.connection = new HubConnectionBuilder().withUrl(this.hubUrl).withAutomaticReconnect().configureLogging(LogLevel.Debug).build();
 
       this.registerEventHandlers();
+      console.log("connection connect to: ", this.hubUrl);
 
       await this.connection.start();
       console.log("SignalR connection established.");
     } catch (error) {
       console.error("Error starting SignalR connection:", error);
-      setTimeout(() => this.startConnection(), 5000); // Retry after delay
     }
   }
 
@@ -38,8 +34,7 @@ class SignalRService {
     });
 
     this.connection.onclose(async () => {
-      console.error("SignalR connection closed. Attempting to reconnect...");
-      await this.startConnection(); // Restart connection
+      console.log("SignalR connection closed.");
     });
   }
 

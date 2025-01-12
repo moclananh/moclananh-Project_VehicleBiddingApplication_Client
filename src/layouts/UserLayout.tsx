@@ -5,6 +5,12 @@ import { Outlet, useNavigate } from "react-router-dom";
 import NavButton from "../components/nav-button/NavButton";
 import UserCard from "../components/user-card/UserCard";
 import { useAuth } from "../features/auth/hooks/useAuth";
+import { useQueryClient } from "@tanstack/react-query";
+import SignalRService from "../services/signalr.service";
+import { SIGNALR_ENDPOINT } from "../constants/endpoint";
+import { useEffect } from "react";
+import { BiddingEvents } from "../constants/socket";
+const signalRService = new SignalRService(SIGNALR_ENDPOINT);
 const NAV_LINKS = [
   {
     label: "Cars",
@@ -23,9 +29,23 @@ const NAV_LINKS = [
   },
 ];
 const UserLayout = () => {
+  const queryClient = useQueryClient();
   const [opened] = useDisclosure();
   const { removeUserState } = useAuth();
   const navigate = useNavigate();
+  useEffect(() => {
+    signalRService.startConnection().then(() => {
+      signalRService.on(BiddingEvents.SessionList, (data) => {
+        console.log(data);
+        queryClient.invalidateQueries({
+          queryKey: ["sessions"],
+        });
+      });
+    });
+    return () => {
+      signalRService.stopConnection();
+    };
+  }, []);
   return (
     <AppShell navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }} padding="md">
       <AppShell.Navbar>

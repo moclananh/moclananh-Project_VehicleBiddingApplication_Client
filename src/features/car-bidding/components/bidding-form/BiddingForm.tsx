@@ -1,10 +1,15 @@
 import { Button, Card, Divider, Group, NumberInput, Stack, Text } from "@mantine/core";
 import { IconArrowBounce, IconCurrencyDollar, IconHandFingerDown, IconMathMaxMin } from "@tabler/icons-react";
-import { defaultTo, toNumber } from "lodash";
+import { toNumber } from "lodash";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { handleAxiosError } from "../../../../libs/error";
+import { BiddingService } from "../../../../services/bidding.service";
 import { useAuth } from "../../../auth/hooks/useAuth";
+import { IBiddingRequest } from "../../types/bidding.type";
 import { IBidding } from "../../types/sessions.type";
+import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 export interface BiddingFormProps {
   highestBidding?: number;
   minimumJumpingValue?: number;
@@ -13,16 +18,30 @@ export interface BiddingFormProps {
 const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0, currentUserBidding }: BiddingFormProps) => {
   const { user } = useAuth();
   const [biddingValue, setBiddingValue] = useState<number>(highestBidding + minimumJumpingValue);
-  const handleBidding = () => {
-    if (biddingValue > defaultTo(user?.budget, 0)) {
-      open();
-    } else {
-      toast.success("Successfully Bidded");
-    }
-  };
+  const queryClient = useQueryClient();
+  const { sessionId } = useParams();
+
   useEffect(() => {
     setBiddingValue(highestBidding + minimumJumpingValue);
   }, [highestBidding, minimumJumpingValue]);
+  const handleBidding = async () => {
+    const request: Partial<IBiddingRequest> = {
+      biddingSessionId: sessionId,
+      userId: user?.id,
+      userCurrentBidding: biddingValue,
+    };
+
+    try {
+      const response = await BiddingService.postBidding(request);
+      await queryClient.invalidateQueries({
+        queryKey: ["session-details-with-user", user?.id, sessionId],
+      });
+
+      toast.success(response.message);
+    } catch (error) {
+      handleAxiosError(error);
+    }
+  };
   return (
     <Card
       withBorder
@@ -32,6 +51,7 @@ const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0, currentUserB
         gap: "15px",
       }}
     >
+      {sessionId}
       <Group gap="md">
         <Group>
           <IconArrowBounce size={25} />

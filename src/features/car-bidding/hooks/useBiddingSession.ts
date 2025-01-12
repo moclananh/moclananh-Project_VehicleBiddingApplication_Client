@@ -1,8 +1,8 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { BiddingService } from "../../../services/bidding.service";
 import { UserService } from "../../../services/user.service";
 import { useAuth } from "../../auth/hooks/useAuth";
 import { IBiddingFilter } from "../types/sessions.type";
-import { BiddingService } from "../../../services/bidding.service";
 
 export const useBiddingSession = (filter: Partial<IBiddingFilter> | null) => {
   const { user } = useAuth();
@@ -11,9 +11,8 @@ export const useBiddingSession = (filter: Partial<IBiddingFilter> | null) => {
     throw new Error("User ID is required to fetch the report.");
   }
   const query = useQuery({
-    queryKey: ["session", userId, filter],
+    queryKey: ["sessions", userId, filter],
     queryFn: () => UserService.getSessionByUserId(userId, filter),
-    placeholderData: keepPreviousData,
   });
   return query;
 };
@@ -28,7 +27,7 @@ export const useBiddingSessionDetails = (id: string) => {
 
 export const useBiddingSessionDetailsWithUserState = (userId: string, sessionId: string) => {
   const query = useQuery({
-    queryKey: ["session-details-with-user-state", userId, sessionId],
+    queryKey: ["session-details-with-user", userId, sessionId],
     queryFn: () => BiddingService.getSessionByIdWithUserState(userId, sessionId),
     placeholderData: keepPreviousData,
   });

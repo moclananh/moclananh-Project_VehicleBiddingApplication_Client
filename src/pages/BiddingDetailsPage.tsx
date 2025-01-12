@@ -1,22 +1,54 @@
 import { Badge, Card, ColorSwatch, Container, Group, Image, SimpleGrid, Stack, Text, Title } from "@mantine/core";
 import { IconArchive, IconGauge, IconHorse, IconUsers } from "@tabler/icons-react";
 import { toString } from "lodash";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { SIGNALR_ENDPOINT } from "../constants/endpoint";
 import { statusMapping } from "../constants/ui";
 import { useAuth } from "../features/auth/hooks/useAuth";
 import BiddingForm from "../features/car-bidding/components/bidding-form/BiddingForm";
 import BiddingHistory from "../features/car-bidding/components/bidding-history/BiddingHistory";
 import { useBiddingSessionDetailsWithUserState } from "../features/car-bidding/hooks/useBiddingSession";
 import { handleAxiosError } from "../libs/error";
+import SignalRService from "../services/signalr.service";
+import { BiddingEvents } from "../constants/socket";
+import { useQueryClient } from "@tanstack/react-query";
+const signalRService = new SignalRService(SIGNALR_ENDPOINT);
 
 const BiddingDetailsPage = () => {
   const { user } = useAuth();
   const { sessionId } = useParams();
   const { data: responseData, error } = useBiddingSessionDetailsWithUserState(toString(user?.id), toString(sessionId));
+  const queryClient = useQueryClient();
   const biddingDetails = responseData?.data ?? null;
   if (error) {
     handleAxiosError(error);
   }
+  useEffect(() => {
+    signalRService.startConnection().then(() => {
+      signalRService.send(BiddingEvents.JoinBiddingSession, sessionId);
+    });
+
+    signalRService.on(BiddingEvents.UserJoined, (connectionId: string) => {
+      console.log(`User joined: ${connectionId}`);
+    });
+
+    signalRService.on(BiddingEvents.UserLeft, (connectionId: string) => {
+      console.log(`User left: ${connectionId}`);
+    });
+    signalRService.on(BiddingEvents.ReceiveBid, (data) => {
+      console.debug("New bidding: ", data);
+      queryClient.invalidateQueries({ queryKey: ["session-details-with-user", user?.id, sessionId] }).then(() => {
+        console.debug("The bidding session has been updated.");
+      });
+    });
+
+    return () => {
+      signalRService.send(BiddingEvents.LeaveBiddingSession, sessionId).then(() => {
+        signalRService.stopConnection();
+      });
+    };
+  }, []);
 
   return (
     <Container size="xl">

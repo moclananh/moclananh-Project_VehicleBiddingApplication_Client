@@ -1,4 +1,5 @@
-import { BIDDING_SESSION_ENDPOINT, USER_ENDPOINT } from "../constants/endpoint";
+import { BIDDING_ENDPOINT, BIDDING_SESSION_ENDPOINT, USER_ENDPOINT } from "../constants/endpoint";
+import { IBiddingRequest } from "../features/car-bidding/types/bidding.type";
 import { IBiddingFilter, IBiddingSession, IBiddingSessionWithMetaData } from "../features/car-bidding/types/sessions.type";
 import http from "../libs/interceptor";
 import { ApiResponse } from "../types/api-response";
@@ -15,6 +16,10 @@ export const BiddingService = {
   },
   getSessionByIdWithUserState: async (userId: string, sessionId: string) => {
     const response = await http.get<ApiResponse<IBiddingSession>>(`${USER_ENDPOINT}/${userId}/sessions/${sessionId}`);
+    return response.data;
+  },
+  postBidding: async (request: Partial<IBiddingRequest>) => {
+    const response = await http.post<ApiResponse<IBiddingSession>>(BIDDING_ENDPOINT, request);
     return response.data;
   },
 };

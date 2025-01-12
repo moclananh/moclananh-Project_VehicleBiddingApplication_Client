@@ -8,6 +8,7 @@ import BiddingSessionPage from "./pages/BiddingSessionPage";
 import CarDetailsPage from "./pages/CarDetailsPage";
 import ReportPage from "./pages/ReportPage";
 import BiddingDetailsPage from "./pages/BiddingDetailsPage";
+import AccessDeniedPage from "./pages/errors/AccessDeniedPage";
 
 const routes: RouteObject[] = [
   {
@@ -53,6 +54,10 @@ const routes: RouteObject[] = [
         element: <h1>Admin</h1>,
       },
     ],
+  },
+  {
+    path: "/access-denied",
+    element: <AccessDeniedPage />,
   },
 ];
 
