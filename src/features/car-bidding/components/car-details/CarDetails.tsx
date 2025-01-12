@@ -17,8 +17,6 @@ const statusMapping: Record<string, string> = {
 };
 
 export function CarDetails({ car, onBack }: CarDetailsProps) {
-  const isBiddingAllowed = car.status === "InBidding";
-
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Flex gap="lg" wrap="wrap" direction={{ base: "column", md: "row" }} align="flex-start" justify="center">

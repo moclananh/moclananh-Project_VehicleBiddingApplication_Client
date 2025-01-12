@@ -51,7 +51,6 @@ const BiddingForm = ({ highestBidding = 0, minimumJumpingValue = 0, currentUserB
         gap: "15px",
       }}
     >
-      {sessionId}
       <Group gap="md">
         <Group>
           <IconArrowBounce size={25} />
