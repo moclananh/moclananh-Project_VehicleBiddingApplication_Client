@@ -2,6 +2,11 @@
 
 A modern, real-time vehicle auction and bidding platform built with React and TypeScript. Users can browse available vehicles, participate in live bidding sessions, track their bidding history, and manage their profiles. The application features real-time updates via SignalR and a responsive design powered by Mantine UI.
 
+## Project demo: [Demo_Video_Link](https://drive.google.com/file/d/1ABw3LMAHKHIbqwpjAj-g2-5lP9ouV7zA/view?usp=sharing)
+
+![bidding_demo2](./src/assets/bidding_demo2.png)
+![bidding_demo](./src/assets/bidding_project.png)
+
 ## Core Features
 
 - **Vehicle Catalog**: Browse and filter vehicles by brand, model, color, price range, and status
