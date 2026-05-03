@@ -1,5 +1,5 @@
-export const BASE_URL = "https://localhost:6001/api";
-export const SIGNALR_ENDPOINT = "https://localhost:6001/bidding-hub";
+export const BASE_URL = "http://localhost:8080/api";
+export const SIGNALR_ENDPOINT = "http://localhost:8080/bidding-hub";
 // User endpoint
 export const LOGIN_ENDPOINT = "/authenticate/login";
 export const REGISTER_ENDPOINT = "/authenticate/register";

@@ -156,6 +156,35 @@ src/
    - Primitive atoms for filter and UI state
    - Lightweight alternative to Redux
 
+### List Account to testing
+
+List account test:
+
+```
+"admin",
+"password",
+"admin123",
+"Test1234!",
+"P@ssw0rd",
+"123456",
+"password123",
+"test123",
+"user123",
+"test",
+"test1",
+"test2",
+"test3",
+"test4",
+"tina",
+"admin@admin.com",
+"test@gmail.com",
+"tina@gmail.com",
+"user@example.com"
+"user123@example.com"
+```
+
+Password default: `123123`
+
 ### API Integration
 
 - **Axios Interceptor Pattern**:
